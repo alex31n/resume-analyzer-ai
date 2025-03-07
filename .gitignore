@@ -1,0 +1,13 @@
+# Ignore model checkpoints and cache
+models/checkpoints/
+*.pt
+*.bin
+*.pkl
+
+# Ignore dataset cache
+data/raw_data/
+data/processed_data/
+__pycache__/
+
+# Ignore Jupyter Notebook checkpoints
+notebooks/.ipynb_checkpoints/

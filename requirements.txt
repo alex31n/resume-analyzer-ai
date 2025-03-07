@@ -1,0 +1,12 @@
+transformers
+accelerate
+peft
+datasets
+bitsandbytes
+torch
+jsonlines
+pandas
+numpy
+scipy
+scikit-learn
+jupyterlab
