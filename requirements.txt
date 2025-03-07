@@ -1,12 +1,10 @@
+
+torch
 transformers
 accelerate
 peft
-datasets
 bitsandbytes
-torch
-jsonlines
-pandas
-numpy
-scipy
-scikit-learn
-jupyterlab
+datasets
+# sentencepiece
+# for models mistralai/Mistral-7B-Instruct-v0.3
+# protobuf
