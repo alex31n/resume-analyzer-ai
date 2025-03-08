@@ -11,6 +11,7 @@ print("CUDA available:", torch.cuda.is_available())
 model_name = constants.model_name
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer.pad_token = tokenizer.eos_token  # Use the EOS token as padding
 
 # Apply 4-bit quantization
 quantization_config = BitsAndBytesConfig(
@@ -20,7 +21,7 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_quant_type="nf4"
 )
 
-
+# Load model
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     device_map="auto",
@@ -28,22 +29,33 @@ model = AutoModelForCausalLM.from_pretrained(
     quantization_config=quantization_config,
 )
 
+# Enable training mode
+model.config.use_cache = False
+
 config = LoraConfig(
     r=8,
     lora_alpha=16,
     target_modules=["q_proj", "v_proj"],
-    lora_dropout=0.1,
+    lora_dropout=0.05,
     bias="none",
     task_type="CAUSAL_LM"
 )
 
 model = get_peft_model(model, config)
 
-dataset = load_dataset("json", data_files=constants.process_file_path)
+dataset = load_dataset("json", data_files={"train": constants.process_file_path})
 
-def tokenize_function(example):
-    return tokenizer(example["input"], padding="max_length", truncation=True)
+def tokenize_function(examples):
+    input_texts = examples["prompt"]
+    output_texts = examples["response"]
 
+    inputs = tokenizer(input_texts, padding="max_length", truncation=True, max_length=512)
+    labels = tokenizer(output_texts, padding="max_length", truncation=True, max_length=512)
+
+    inputs["labels"] = labels["input_ids"]  # Add labels for loss computation
+    return inputs
+
+# Apply tokenization
 tokenized_datasets = dataset.map(tokenize_function, batched=True)
 
 training_args = TrainingArguments(
@@ -52,19 +64,18 @@ training_args = TrainingArguments(
     gradient_accumulation_steps=4,
     num_train_epochs=3,
     save_steps=500,
-    evaluation_strategy="epoch",
-    logging_dir="logs",
-    logging_steps=50,
     save_total_limit=2,
-    load_best_model_at_end=True,
-    fp16=True,
-    gradient_checkpointing=True,
+    logging_dir="logs",
+    logging_steps=10,
+    report_to="none",
 )
 
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_datasets["train"],
+    tokenizer=tokenizer,
+    data_collator=None,
 )
 
 if __name__ == "__main__":

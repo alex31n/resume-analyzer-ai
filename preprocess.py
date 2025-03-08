@@ -19,7 +19,7 @@ def preprocess_dataset(csv_path, output_path):
             "summary": f"Skills: {row['skills']}\nExperience: {row['experience']} years\nEducation: {row['education']}",
             "matched_roles": row['job_role'],
         }
-        training_data.append({"input": prompt, "output": json.dumps(response)})
+        training_data.append({"prompt": prompt, "response": json.dumps(response)})
 
     # Create the parent directories if they don't exist
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
