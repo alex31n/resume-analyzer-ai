@@ -1,5 +1,6 @@
 # Ignore model checkpoints and cache
 models/checkpoints/
+models/fine_tuned_llama_resume/
 *.pt
 *.bin
 *.pkl
