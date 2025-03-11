@@ -56,7 +56,7 @@ python train.py --resume_from_checkpoint models/checkpoints/latest
 ## Testing
 To analyze a sample resume:
 ```bash
-python inference.py --resume "sample_resume.txt"
+python inference.py
 ```
 
 ## Contributing
