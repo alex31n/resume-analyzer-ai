@@ -1,0 +1,61 @@
+I need to build a demo AI project for the Resume Analyzer. 
+In this AI model, it can analyze given Resume document files and give a summary and score with matched skills, education, keywords. Also, it suggests the best roles that suit the candidate.
+
+My plan is to fine-tune Llama 3.1 8b with a resume dataset. I couldn't find any proper dataset for this case. so I need to create a demo dataset.
+
+Generate a realistic resume dataset with the following fields:
+job_category - Broad industry category.
+job_role - Specific job title.
+skills - A comma-separated list of key skills relevant to the job role.
+experience - Number of years of experience.
+education - Educational background.
+resume_text - A detailed, unstructured, realistic, and diverse resume summary.
+Guidelines for resume_text generation:
+The length should be much longer, between 100 and 300 words.
+Include a random real name for demo.
+The format should vary across resumes to reflect real-world diversity in resume writing styles.
+Use different sections and different labels that look like a real resume.
+Use a mix of structured and freeform formats, including bullet points, paragraphs, and headings.
+Use different different formats and styles
+Ensure randomized sentence structures and layouts to improve AI training.
+Add random additional details, such as:
+Contributions to open-source projects.
+Leadership experience in technical teams.
+Achievements like awards or publications.
+Mentorship experience or training roles.
+Ensure the generated resumes are rich in text, realistic, and balanced, as if parsed from actual resumes. these demo data look like real.
+
+write only json file with 100+ records
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I need to build a demo AI project for the Resume Analyzer. 
+In this AI model, it can analyze given Resume document files and give a summary and score with matched skills, education, keywords. Also, it suggests the best roles that suit the candidate.
+
+My plan is to fine-tune Llama 3.1 8b with a resume dataset. I couldn't find any proper dataset for this case. so I need to create a demo dataset.
+
+Generate a realistic resume dataset in CSV format with the following fields:
+job_category - Broad industry category (e.g., Software Engineering, Data Science, Marketing).
+job_role - Specific job title (e.g., Backend Engineer, Data Analyst, SEO Specialist).
+skills - A comma-separated list of key skills relevant to the job role.
+experience - Number of years of experience.
+education - Educational background (e.g., "Bachelor's in Computer Science").
+resume_text - A detailed, unstructured, realistic, and diverse resume summary.
+Guidelines for resume_text generation:
+The length should be much longer, between 200 and 500 words.
+Include a name (e.g., "John Doe", "Emily Smith").
+The format should vary across resumes to reflect real-world diversity in resume writing styles.
+Use different sections and different labels that look like a real resume.
+Use a mix of structured and freeform formats, including bullet points, paragraphs, and headings.
+Use different different formats and styles
+Ensure randomized sentence structures and layouts to improve AI training.
+Add random additional details, such as:
+Contributions to open-source projects.
+Leadership experience in technical teams.
+Achievements like awards or publications.
+Mentorship experience or training roles.
+Ensure the generated resumes are rich in text, realistic, and balanced, as if parsed from actual resumes. these demo data look like real.
+
+write only csv file with 1000+ rows
